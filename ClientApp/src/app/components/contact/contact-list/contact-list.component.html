@@ -1,0 +1,99 @@
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <h4 i18n class="my-header">
+        Contact List
+      </h4>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <p>
+        Lorem ipsum dolor...
+      </p>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <a i18n class="btn btn-secondary" routerLink="/contacts/create">
+        CREATE CONTACT
+      </a>
+    </div>
+  </div>
+</div>
+
+<div>
+  <!--<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col" sortable="name">Contact name</th>-->
+  <!--(sort)="onSort($event)">Contact name</th>-->
+  <!--<th scope="col" sortable="phoneNumber">Phone number</th>
+        <th scope="col" sortable="birthDate">Birth date</th>
+        <th scope="col" sortable="type">Contact type</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts | slice: (page-1) * pageSize : page * pageSize">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.phoneNumber }}</td>
+        <td>{{ contact.birthDate | date}}</td>
+        <td>{{ contact.type.description }}</td>
+        <td>
+          <a (click)="getSelectedRecord(contact)" class="btn btn-info" routerLink="/contacts/edit/{{contact.id}}">
+            EDIT
+          </a>
+        </td>
+        <td>
+          <button (click)="deleteContact(contact.id)" class="btn btn-danger">DELETE</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>-->
+  <!--<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="listSize" [(page)]="page" [pageSize]="pageSize"
+                    [maxSize]="5" [boundaryLinks]="true">
+    </ngb-pagination>
+
+    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">-->
+  <!--(ngModelChange)="refreshCountries()">-->
+  <!--<option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+        <option [ngValue]="10">10 items per page</option>
+      </select>
+    </div>-->
+</div>
+
+  <div class="card">
+    <p-table [value]="contacts" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,25]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon> Contact Name</th>
+          <th pSortableColumn="phoneNumber"><p-sortIcon field="phoneNumber"></p-sortIcon> Phone Number</th>
+          <th pSortableColumn="birthDate"><p-sortIcon field="birthDate"></p-sortIcon> Birth Date</th>
+          <th pSortableColumn="type.description"><p-sortIcon field="type.description"></p-sortIcon> Contact type</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-contact>
+        <tr>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.phoneNumber }}</td>
+          <td>{{ contact.birthDate | date}}</td>
+          <td>{{ contact.type.description }}</td>
+          <td>
+            <a (click)="getSelectedRecord(contact)" class="btn btn-secondary" routerLink="/contacts/edit/{{contact.id}}">
+              <i class="pi pi-user-edit"></i>
+              EDIT
+            </a>
+          </td>
+          <td>
+            <button (click)="deleteContact(contact.id)" class="btn btn-danger">
+              <i class="pi pi-trash"></i>
+              DELETE
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>

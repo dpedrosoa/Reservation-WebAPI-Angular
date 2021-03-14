@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import '~bootstrap/dist/css/bootstrap.min.css';
+*/
+/*for invalid form controls*/
+input.invalid {
+  /*border-color: red;*/
+  border-left: 5px solid #a94442; /* red */
+}
+
+.my-header{
+    color: #c40000;
+}
+
+/*Top-banner*/
+.top-banner {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/top-banner.jpg");
+  /* Set a specific height */
+  height: 50%;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.banner-text{
+  color: white;
+}

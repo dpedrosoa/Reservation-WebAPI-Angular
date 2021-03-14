@@ -1,0 +1,12 @@
+<form autocomplete="off" #reservationForm="ngForm" (submit)="onSubmit(reservationForm)">
+
+  <app-contact-form></app-contact-form>
+
+  <app-reservation-form></app-reservation-form>
+
+  <div class="form-group">
+    <button class="btn btn-danger" type="submit" [disabled]="reservationForm.invalid">
+      SEND
+    </button>
+  </div>
+</form>

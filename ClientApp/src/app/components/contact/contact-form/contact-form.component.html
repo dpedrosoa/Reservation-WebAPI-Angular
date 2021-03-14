@@ -1,0 +1,62 @@
+
+<input type="hidden" name="contactId" [value]="service.formData.id" />
+
+<div class="form-row">
+
+  <div class="form-group col-md-3 col-sm-12">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon"><i class="pi pi-users"></i></span>
+    </div>
+      <input type="text" pInputText class="form-control form-control-lg" placeholder="Contact Name ..."
+             id="contactName" name="contactName" #contactName="ngModel" [(ngModel)]="service.formData.name"
+             #name="ngModel" required (keyup)="searchContact($event)">
+    
+    <!--{{service.formData.name}} - {{service.formData.id}}-->
+    <div [hidden]="contactName.valid || contactName.pristine" class="alert alert-danger">
+      Contact Name is required"
+    </div>
+    <div *ngIf="contactNotExists()" class="alert alert-danger">
+      Contact does not exist
+    </div>
+  </div>
+
+  <div class="form-group col-md-3 col-sm-12">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
+    </div>
+      <select pInputText class="form-control form-control-lg" id="contactType"
+              name="contactType" #contactType="ngModel" [(ngModel)]="service.formData.typeId"
+              required>
+        <option [value]="0" disabled selected>Contact Type...</option>
+        <option *ngFor="let type of contactTypes" [value]="type.id">{{type.description}}</option>
+      </select>
+    
+    <div *ngIf="service.formData.typeId == 0 && contactType.touched" class="alert alert-danger">
+      Contact Type is required
+    </div>
+  </div>
+
+
+  <div class="form-group col-md-3 col-sm-12">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+    </div>
+      <input class="form-control form-control-lg" placeholder="Phone:  -  -" id="phoneNumber"
+             name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="service.formData.phoneNumber">
+    
+  </div>
+
+  <div class="form-group col-md-3 col-sm-12">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+    </div>
+      <input class="form-control form-control-lg" placeholder="Birth date (yyyy-MM-dd)" type="text" id="birthDate"
+             name="birthDate" #birthDate="ngModel" [(ngModel)]="service.birthDate"
+             ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"
+             required>
+    <div [hidden]="birthDate.valid || birthDate.pristine" class="alert alert-danger">
+      Birth date is required
+    </div>
+  </div>
+
+  </div>

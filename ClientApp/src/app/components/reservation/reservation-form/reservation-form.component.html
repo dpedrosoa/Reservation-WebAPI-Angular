@@ -1,0 +1,41 @@
+
+<input type="hidden" name="reservationId" [value]="service.formData.id" />
+
+<div class="form-group">
+  <p-editor [(ngModel)]="service.formData.description" [style]="{'height':'320px'}"></p-editor>
+  <!--<div class="form-group col-md-3">
+    <input name="d" #Status="ngModel" type="date" placeholder="Reservation date"
+           [(ngModel)]="service.formData.reservationDate" class="form-control">
+  </div>-->
+  {{service.formData.description}}
+</div>
+
+<!--Pipe search contact
+
+  <div class="content" role="main">
+  <div class="card">
+    <div class="form-group">
+      <label for="search-text">Search Text</label>
+      <input type="email" class="form-control" id="search-text" aria-describedby="search-text"
+             [(ngModel)]="searchText" placeholder="Enter text to search"
+             autofocus>
+    </div>
+    <ul class="list-group list-group-flush">-->
+<!--results of ngFor is passed to appFilter with argument searchText-->
+<!--<li class="list-group-item" *ngFor="let contact of contacts | contactFilter: searchText">
+        {{contact.name}}
+      </li>
+    </ul>
+  </div>
+</div>-->
+<!--Autocomplete
+
+  <div style="text-align:center">
+  <h1>
+    Primeng Angular AutoComplete Demo
+  </h1>
+</div>
+<div style="text-align:center">
+  <p-autoComplete [(ngModel)]="selectNumber" [suggestions]="output" (completeMethod)="search($event)"
+                  placeholder="Search" [dropdown]="true"></p-autoComplete>
+</div>-->

@@ -1,0 +1,13 @@
+.star {
+  font-size: 1.5rem;
+  color: #828282; /*gray*/
+}
+.filled {
+  color: #e8d309;/*yellow*/
+}
+.red-heart {
+  color: red;
+}
+.gray-heart {
+  color: gray;
+}

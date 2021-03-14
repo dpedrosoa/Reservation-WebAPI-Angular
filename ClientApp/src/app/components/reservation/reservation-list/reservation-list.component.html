@@ -1,0 +1,90 @@
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <h4 i18n class="my-header">
+        Reservation List
+      </h4>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <p>
+        Lorem ipsum dolor...
+      </p>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <a i18n class="btn btn-secondary" routerLink="/reservations/create">
+        CREATE RESERVATION
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-sm-12">
+  <div class="row">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-secondary" id="sortBy" ngbDropdownToggle>
+        <i class="pi pi-sort-amount-down-alt"></i>
+        Sort by
+      </button>
+      <div ngbDropdownMenu aria-labelledby="sortBy">
+        <button ngbDropdownItem (click)="sortBy_Date_Asc()">By Date Ascending</button>
+        <button ngbDropdownItem (click)="sortBy_Date_Desc()">By Date Descending</button>
+        <button ngbDropdownItem (click)="sortBy_Contact_Asc()">By Alphabetic Ascending</button>
+        <button ngbDropdownItem (click)="sortBy_Contact_Desc()">By Alphabetic Descending</button>
+        <button ngbDropdownItem (click)="sortBy_Ranking_Desc()">By Ranking</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row card">
+    <p-table [value]="reservations" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,25]">
+      <ng-template pTemplate="body" let-reservation>
+        <tr>
+          <td>
+            <div class="col">
+              <div class="row">
+                <b>
+                  {{ reservation.contact.name }}
+                </b>
+              </div>
+              <div class="row">{{ reservation.reservationDate | date: 'EEEE MMM d - h:mm a' }}</div>
+            </div>          
+          </td>
+          <td>
+            <div class="col">
+              <div class="row">
+                <b>Ranking</b> - {{ reservation.ranking }}
+              </div>
+              <div class="row">
+                <!--<p-rating [(ngModel)]="reservation.ranking"></p-rating>-->
+                <ngb-rating [(ngModel)]="reservation.ranking" [(rate)]="reservation.ranking" (click)="setRanking(reservation)">
+                  <ng-template let-fill="fill" let-index="index">
+                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                  </ng-template>
+                </ngb-rating>
+              </div>
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-light" *ngIf="reservation.favorite == 0" (click)="addFavorite(reservation)">
+              <b>Add Favorite</b>
+              <i class="pi pi-heart gray-heart" style="font-size: 2rem"></i>
+            </button>
+            <button class="btn btn-light" *ngIf="reservation.favorite == 1" (click)="addFavorite(reservation)">
+              Add Favorite
+              <i class="pi pi-heart red-heart" style="font-size: 2rem"></i>
+            </button>
+          </td>
+          <td>
+            <a (click)="getSelectedRecord(reservation)" class="btn btn-secondary" routerLink="/reservations/edit/{{reservation.id}}">
+              EDIT
+            </a>
+          </td>
+        </tr>
+
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>

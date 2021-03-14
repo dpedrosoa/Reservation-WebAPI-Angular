@@ -1,0 +1,13 @@
+<form autocomplete="off" #form="ngForm" (submit)="onSubmit(form)" novalidate>
+
+  <app-contact-form></app-contact-form>
+  
+  <div class="form-group">
+    <button class="btn btn-danger" type="submit"
+            [disabled]="form.invalid">
+      SEND
+    </button>
+  </div>
+</form>
+
+
