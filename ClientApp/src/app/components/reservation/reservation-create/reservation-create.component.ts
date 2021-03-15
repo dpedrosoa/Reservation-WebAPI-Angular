@@ -25,26 +25,35 @@ export class ReservationCreateComponent implements OnInit {
 
   onSubmit(reservationForm: NgForm) {
     if (this.contactService.formData.id == 0) {
-      //console.log("create contact: " + this.contactService.formData);// + "-TypeId: " + this.contactService.formData.typeId);
+      //Create reservation creating new contact
       this.createContact_createReservation(reservationForm);
     }
     else {
+      //Create reservation using existing contact
       this.contact = this.contactService.formData;
       this.createReservation(reservationForm);
     }
   }
   
   /**
-   * Create the contact before creating the reservation
+   * Create new contact first, and then create the reservation with that contact
    * @param reservationForm
    */
   createContact_createReservation(reservationForm: NgForm) {
-    console.log(this.contactService.formData);
+
+    var myContact = new Contact();
+    myContact.name = this.contactService.formData.name;
+    myContact.typeId = this.contactService.formData.typeId;
+    myContact.phoneNumber = this.contactService.formData.phoneNumber;
+    myContact.birthDate = this.contactService.formData.birthDate;
+
+    this.contactService.formData = myContact;
+
     this.contactService.createContact()
       .subscribe(
         response => {
-          //console.log("Se ha creado el contacto: ");
           //console.log(response);
+          this.toastr.success("Success!", "Contact created");
           this.contact = response;
           this.createReservation(reservationForm);
         },
@@ -52,7 +61,10 @@ export class ReservationCreateComponent implements OnInit {
       );
   }
 
-
+  /**
+   * Create reservation
+   * @param reservationForm
+   */
   createReservation(reservationForm: NgForm) {
     this.service.formData.contactId = this.contact.id;
     this.service.formData.reservationDate = new Date();//get current date time

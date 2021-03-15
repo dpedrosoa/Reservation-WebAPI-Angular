@@ -23,7 +23,7 @@ namespace ReservationSystem.Models
         
         [Required]
         public int TypeId { get; set; }
-        
+
         public ContactType Type { get; set; }
         
         [JsonIgnore]

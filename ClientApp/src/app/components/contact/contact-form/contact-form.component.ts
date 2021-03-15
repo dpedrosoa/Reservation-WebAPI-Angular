@@ -18,6 +18,12 @@ export class ContactFormComponent implements OnInit {
   isContactForm: boolean;
   isReservationEditForm: boolean;
 
+  ////autocomplete
+  //text: string;
+  //results: string[];
+  //filteredContacts: Contact[];
+  //selectedContact: Contact;
+
   constructor(public service: ContactService)
   { }
 
@@ -86,14 +92,16 @@ export class ContactFormComponent implements OnInit {
           this.service.formData.birthDate = contact.birthDate;
           this.initializeBirthDate();
           this.service.formData.typeId = contact.typeId;
+          this.service.formData.type = contact.type;
         }
         else {
-          //not found
+          //contact not found
           this.service.formData.id = 0;
           this.service.formData.name = name;//written value
           this.service.formData.phoneNumber = "";
           this.service.formData.birthDate = new Date();
           this.initializeBirthDate();
+          this.service.formData.type = new ContactType();
           this.service.formData.typeId = 0;
         }
       }
@@ -101,10 +109,10 @@ export class ContactFormComponent implements OnInit {
   }
 
   /**
-   * Used to validate contact on edit reservation form
+   * Used to disable contact input on edit reservation form if contact already exists
    */
-  contactNotExists() {
-    return this.service.isReservationEditForm && this.service.formData.id == 0;
+  contactExists() {
+    return this.service.isReservationEditForm && this.service.formData.id > 0;
   }
 
 }

@@ -22,18 +22,10 @@ export class ReservationListComponent implements OnInit {
 
   reservations: Reservation[];
 
-  //used for pagination
-  page: number;
-  pageSize: number;
-  listSize: number;
-
 
   ngOnInit(): void {
     this.getAllReservations();
     this.clearSelectedRecord();
-
-    this.page = 1;
-    this.pageSize = 6;
   }
 
   getAllReservations(): void {
@@ -41,14 +33,12 @@ export class ReservationListComponent implements OnInit {
       .subscribe(
         response => {
           this.reservations = response
-          this.listSize = this.reservations.length;//used for pagination
         },
         err => { console.log(err); }
       )
   }
 
   getSelectedRecord(selectedRecord: Reservation) {
-    //console.log("selected: " + selectedRecord.id + "-" + selectedRecord.description + "-" + selectedRecord.contact.name + "-" + selectedRecord.contact.typeId);
     this.service.formData = Object.assign({}, selectedRecord);
     this.contactService.formData = selectedRecord.contact;
     this.contactService.formData.type = selectedRecord.contact.type;
@@ -91,8 +81,20 @@ export class ReservationListComponent implements OnInit {
     this.ratingConfig.max = 5;
     this.ratingConfig.resettable = true;
   }
-  editRanking() {
 
+  /**
+   * Set Reservation ranking
+   * @param reservation
+   */
+  setRanking(reservation: Reservation) {
+    this.service.editReservationObject(reservation)
+        .subscribe(
+        response => {
+            this.toastr.success("Success!", "Reservation ranked");
+            this.refreshList();
+        },
+        err => { console.log(err); }
+      );
   }
 
   refreshList() {
@@ -101,10 +103,10 @@ export class ReservationListComponent implements OnInit {
       .then(
         response => {
           this.reservations = response as Reservation[];
-          this.listSize = this.reservations.length;//used for pagination
         }
       );
   }
+    
 
   sortBy_Date_Asc() {
     var sortedList: Reservation[] = this.reservations.sort(
@@ -178,17 +180,6 @@ export class ReservationListComponent implements OnInit {
     );
 
     this.reservations = sortedList;
-  }
-
-  setRanking(reservation: Reservation) {
-    this.service.editReservationObject(reservation)
-        .subscribe(
-        response => {
-            this.toastr.success("Success!", "Reservation edited");
-            this.refreshList();
-        },
-        err => { console.log(err); }
-      );
   }
 
 }

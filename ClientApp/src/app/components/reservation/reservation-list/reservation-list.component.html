@@ -57,7 +57,6 @@
                 <b>Ranking</b> - {{ reservation.ranking }}
               </div>
               <div class="row">
-                <!--<p-rating [(ngModel)]="reservation.ranking"></p-rating>-->
                 <ngb-rating [(ngModel)]="reservation.ranking" [(rate)]="reservation.ranking" (click)="setRanking(reservation)">
                   <ng-template let-fill="fill" let-index="index">
                     <span class="star" [class.filled]="fill === 100">&#9733;</span>

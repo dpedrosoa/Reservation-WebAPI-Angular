@@ -31,7 +31,7 @@ export class ContactService {
   }
 
   createContact(): Observable<Contact> {
-    //console.log("Contact-Service Data: " + this.formData.id + "-" + this.formData.name + "-" + this.formData.typeId + "-" + this.formData.phoneNumber + "-" + this.formData.birthDate);
+    //console.log(this.formData);
     return this.httpClient.post<Contact>(baseURL, this.formData);
   }
 
@@ -53,5 +53,8 @@ export class ContactService {
     return this.contactTypeService.getAllContactTypes();
   }
 
+  getContactType(id: number): Observable<ContactType> {
+    return this.contactTypeService.getContactType(id);
+  }
 
 }
