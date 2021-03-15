@@ -10,7 +10,7 @@ This is a sample of a reservation system.
 This repository includes 2 projects:
 
 - #### ReservationSystem
-This is the web API that uses a Code-First approach.
+This is the backend Web API that uses a Code-First approach.
 
 - #### ClientApp
-This is the Angular app that requests the ReservationSystem api.
+This is the frontend Angular app that requests the ReservationSystem api.
